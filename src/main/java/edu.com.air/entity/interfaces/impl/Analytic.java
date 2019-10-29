@@ -32,15 +32,16 @@ public class Analytic implements Student {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "studentsAnalytic")
     private List<Mentor> mentors;
 
-    public Analytic(Group group, String name, int age, List<Mentor> mentors) {
-        this.group_column = group;
-        this.name = name;
-        this.age = age;
-        this.mentors = mentors;
-    }
-
     public Analytic(String name, int age) {
         this.name = name;
         this.age = age;
+    }
+
+    public void addMentor(Mentor mentor) {
+        this.mentors.add(mentor);
+    }
+
+    public void setGroup(Group group) {
+        this.group_column = group;
     }
 }

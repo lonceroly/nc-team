@@ -18,7 +18,6 @@ public class Developer implements Student {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "developer_id")
     private Group group_column;
 
     @Column
@@ -29,5 +28,18 @@ public class Developer implements Student {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "studentsDeveloper")
     private List<Mentor> mentors;
+
+    public Developer(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public void addMentor(Mentor mentor) {
+        this.mentors.add(mentor);
+    }
+
+    public void setGroup(Group group) {
+        this.group_column = group;
+    }
 
 }

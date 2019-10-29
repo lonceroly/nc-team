@@ -2,8 +2,8 @@ package edu.com.air.controller;
 
 import edu.com.air.entity.classes.Group;
 import edu.com.air.entity.classes.Mentor;
-import edu.com.air.entity.interfaces.impl.Analytic;
-import edu.com.air.service.AnalyticService;
+import edu.com.air.entity.interfaces.impl.Developer;
+import edu.com.air.service.DeveloperService;
 import edu.com.air.service.GroupService;
 import edu.com.air.service.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/analytic")
-public class AnalyticController {
+@RequestMapping("/developer")
+public class DeveloperController {
 
     @Autowired
-    private AnalyticService analyticService;
+    private DeveloperService developerService;
 
     @Autowired
     private MentorService mentorService;
@@ -25,39 +25,39 @@ public class AnalyticController {
     private GroupService groupService;
 
     @RequestMapping("/add")
-    public Analytic createAnalytic(
+    public Developer createDeveloper(
             @RequestParam String name,
             @RequestParam int age
-            ){
-        return analyticService.addAnalytic(new Analytic(name, age));
+    ){
+        return developerService.addDeveloper(new Developer(name, age));
     }
 
     @RequestMapping("/add/group")
-    public Analytic addGroupToAnalytic(
-            @RequestParam Long analyticId,
+    public Developer addGroupToDeveloper(
+            @RequestParam Long developerId,
             @RequestParam Long groupId
     ) {
-        Analytic analytic = analyticService.getById(analyticId);
         Group group = groupService.getById(groupId);
-        analytic.setGroup(group);
-        return null;
+        Developer developer = developerService.getById(developerId);
+        developer.setGroup(group);
+        return developer;
     }
 
     @RequestMapping("/add/mentor")
-    public Analytic addMentorToAnalytic(
-            @RequestParam Long analyticId,
+    public Developer addMentorToDeveloper(
+            @RequestParam Long developerId,
             @RequestParam Long mentorId
     ) {
-        Analytic analytic = analyticService.getById(analyticId);
+        Developer developer = developerService.getById(developerId);
         Mentor mentor = mentorService.getById(mentorId);
-        analytic.addMentor(mentor);
-        return analytic;
+        developer.addMentor(mentor);
+        return developer;
     }
 
     @RequestMapping("/get/id")
-    private Analytic getAnalyticById(
-            @RequestParam Long analyticId
+    private Developer getDeveloperById(
+            @RequestParam Long developerId
     ) {
-        return analyticService.getById(analyticId);
+        return developerService.getById(developerId);
     }
 }

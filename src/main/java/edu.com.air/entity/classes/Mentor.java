@@ -37,4 +37,21 @@ public class Mentor {
             joinColumns = {@JoinColumn(name = "mentor_id")},
             inverseJoinColumns = {@JoinColumn(name = "analytic_id")})
     private List<Analytic> studentsAnalytic;
+
+    public Mentor(String name, int age) {
+        this.age = age;
+        this.name = name;
+    }
+
+    public void setGroup(Group group) {
+        this.group_column = group;
+    }
+
+    public void addDeveloper(Developer developer) {
+        this.studentsDeveloper.add(developer);
+    }
+
+    public void addAnalytic(Analytic analytic) {
+        this.studentsAnalytic.add(analytic);
+    }
 }

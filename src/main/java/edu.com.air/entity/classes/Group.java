@@ -28,7 +28,19 @@ public class Group {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "group_column")
     private List<Developer> developers;
 
-    @Column(name="number_of_students")
-    private int numberOfStudents;
+    public Group(String type) {
+        this.type = type;
+    }
 
+    public void addMentor(Mentor mentor) {
+        this.mentors.add(mentor);
+    }
+
+    public void addAnalytic(Analytic analytic) {
+        this.analytics.add(analytic);
+    }
+
+    public void addDeveloper(Developer developer) {
+        this.developers.add(developer);
+    }
 }
