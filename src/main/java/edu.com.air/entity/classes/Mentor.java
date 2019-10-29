@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "mentors")
+@Table(name = "mentors_table")
 public class Mentor {
 
     @Id
@@ -22,11 +22,11 @@ public class Mentor {
     @Column
     private int age;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
-    private Group group;
+    private Group group_column;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable( name = "mentor_developer",
                 joinColumns = {@JoinColumn(name = "mentor_id")},
                 inverseJoinColumns = {@JoinColumn(name = "developer_id")})
@@ -37,9 +37,4 @@ public class Mentor {
             joinColumns = {@JoinColumn(name = "mentor_id")},
             inverseJoinColumns = {@JoinColumn(name = "analytic_id")})
     private List<Analytic> studentsAnalytic;
-
-    public Mentor(String name, int age){
-        this.name = name;
-        this.age = age;
-    }
 }

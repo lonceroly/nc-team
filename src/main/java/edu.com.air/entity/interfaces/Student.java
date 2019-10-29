@@ -1,4 +1,6 @@
 package edu.com.air.entity.interfaces;
 
-public interface Student {
+import java.io.Serializable;
+
+public interface Student extends Serializable {
 }

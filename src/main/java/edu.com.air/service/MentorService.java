@@ -8,6 +8,8 @@ public interface MentorService {
 
     Mentor addMentor(Mentor mentor);
 
+    List<Mentor> addMentors(List<Mentor> mentors);
+
     void delete(Long id);
 
     Mentor getByName(String name);

@@ -15,9 +15,16 @@ public class MentorServiceImpl implements MentorService {
     private MentorRepository mentorRepository;
 
     @Override
-    public Mentor addMentor(Mentor analytic){
-        Mentor savedDeveloper = mentorRepository.saveAndFlush(analytic);
-        return savedDeveloper;
+    public Mentor addMentor(Mentor mentor){
+        return mentorRepository.saveAndFlush(mentor);
+    }
+
+    @Override
+    public List<Mentor> addMentors(List<Mentor> mentors){
+        for(Mentor mentor : mentors) {
+            mentorRepository.saveAndFlush(mentor);
+        }
+        return mentors;
     }
 
     @Override
@@ -27,19 +34,16 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     public Mentor getByName(String name){
-        Mentor getDeveloper = mentorRepository.getMentorByName(name);
-        return getDeveloper;
+        return  mentorRepository.getMentorByName(name);
     }
 
     @Override
     public Mentor getById(Long id){
-        Mentor getDeveloper = mentorRepository.findById(id).orElse(null);
-        return getDeveloper;
+        return mentorRepository.findById(id).orElse(null);
     }
 
     @Override
     public List<Mentor> getAll(){
-        List<Mentor> developers = mentorRepository.findAll();
-        return developers;
+        return mentorRepository.findAll();
     }
 }

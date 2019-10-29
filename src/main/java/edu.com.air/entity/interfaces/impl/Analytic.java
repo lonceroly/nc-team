@@ -1,16 +1,18 @@
 package edu.com.air.entity.interfaces.impl;
 
-import edu.com.air.entity.interfaces.Student;
 import edu.com.air.entity.classes.Group;
 import edu.com.air.entity.classes.Mentor;
+import edu.com.air.entity.interfaces.Student;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "analytics")
+@Table(name = "analytics_table")
+@RequiredArgsConstructor
 public class Analytic implements Student {
 
     @Id
@@ -18,8 +20,8 @@ public class Analytic implements Student {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group")
-    private Group group;
+    @JoinColumn(name = "group_column")
+    private Group group_column;
 
     @Column
     private String name;
@@ -30,14 +32,15 @@ public class Analytic implements Student {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "studentsAnalytic")
     private List<Mentor> mentors;
 
-
-
-    public Analytic(String name, int age){
+    public Analytic(Group group, String name, int age, List<Mentor> mentors) {
+        this.group_column = group;
         this.name = name;
         this.age = age;
+        this.mentors = mentors;
     }
 
-    public void addMentor(Mentor mentor) {
-        mentors.add(mentor);
+    public Analytic(String name, int age) {
+        this.name = name;
+        this.age = age;
     }
 }

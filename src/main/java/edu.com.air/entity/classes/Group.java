@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "groups")
+@Table(name = "groups_table")
 public class Group {
 
     @Id
@@ -19,13 +19,13 @@ public class Group {
     @Column
     private String type;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group_column")
     private List<Mentor> mentors;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group_column")
     private List<Analytic> analytics;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "group_column")
     private List<Developer> developers;
 
     @Column(name="number_of_students")
